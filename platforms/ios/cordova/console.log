@@ -1,0 +1,12 @@
+2015-04-13 14:50:28.812 mafia[8854:155374] DiskCookieStorage changing policy from 2 to 0, cookie file: file:///Users/Alvong/Library/Developer/CoreSimulator/Devices/1CB59475-F698-479C-BF32-7F0CCA629A43/data/Containers/Data/Application/9B4E22C4-3763-4A72-A22F-38A707AFBE3E/Library/Cookies/Cookies.binarycookies
+2015-04-13 14:50:28.900 mafia[8854:155374] Apache Cordova native platform version 3.8.0 is starting.
+2015-04-13 14:50:28.900 mafia[8854:155374] Multi-tasking -> Device: YES, App: YES
+2015-04-13 14:50:28.905 mafia[8854:155374] Unlimited access to network resources
+2015-04-13 14:50:29.046 mafia[8854:155374] CDVPlugin class IonicKeyboard (pluginName: keyboard) does not exist.
+2015-04-13 14:50:29.046 mafia[8854:155374] [CDVTimer][keyboard] 0.293016ms
+2015-04-13 14:50:29.046 mafia[8854:155374] [CDVTimer][TotalPluginStartup] 0.554025ms
+2015-04-13 14:50:29.142 mafia[8854:155374] Resetting plugins due to page load.
+2015-04-13 14:50:29.627 mafia[8854:155374] CDVPlugin class CDVDevice (pluginName: Device) does not exist.
+2015-04-13 14:50:29.628 mafia[8854:155374] ERROR: Plugin 'Device' not found, or is not a CDVPlugin. Check your plugin mapping in config.xml.
+2015-04-13 14:50:29.628 mafia[8854:155374] -[CDVCommandQueue executePending] [Line 159] FAILED pluginJSON = ["Device884568194","Device","getDeviceInfo",[]]
+2015-04-13 14:50:30.694 mafia[8854:155374] Finished load of: file:///Users/Alvong/Library/Developer/CoreSimulator/Devices/1CB59475-F698-479C-BF32-7F0CCA629A43/data/Containers/Bundle/Application/36C10485-BCD8-4572-AA76-E638EFED7D03/mafia.app/www/index.html#/
