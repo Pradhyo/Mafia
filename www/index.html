@@ -114,8 +114,7 @@
           <img src="http://fc06.deviantart.net/fs6/i/2005/104/9/2/Mafia__The_Wallpaper_by_Ka0z.jpg"width="300" height="300">
           </div>
           <a href="#/createroom" class="button button-royal button-block">Create A New Room</a>
-          <a href="#/findaroom" class="button button-positive button-block">Find an Existing Room Nearby</a>
-
+          <a href="#/findaroom" class="button button-positive button-block">Join A Room</a>
           </ion-content>
           </ion-view></script>
     </script>
@@ -125,13 +124,17 @@
           <div id="logo2">
           <img src="http://images.clipartpanda.com/mafia-clipart-bigger-version-hi.png"width="150" height="150">
           </div>
-          <form>
+          <form action = "/" method = "post">
           <label class="item item-input">
           <span class="input-label">Room name</span>
-          <input type="text" placeholder="">
+          <input type="text" placeholder="classic-mafia" name = "room_name">
           </label>
+          <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="Password" placeholder="" name = "room_password">
+          </label>
+          <input type = "submit" value = "Create" class="button button-dark button-block">
           </form>
-          <a href="#waiting" class="button button-dark button-block">Create!</a>
           </ion-content>
           </ion-view>
     </script>
@@ -142,16 +145,16 @@
           <img src="http://images.clipartpanda.com/mafia-clipart-bigger-version-hi.png"width="150" height="150">
           </div>
           <form>
-          <label class="item item-select">
-          <span class="input-label">Enter your username</span>
-          <select></select>
-          </label>
+            <label class="item item-input">
+            <span class="input-label">Your Name</span>
+            <input type="text" placeholder="{{name}}">
+            </label>          
           </form>
           <button class="button button-dark button-block">Ready to Play!</button>
           </ion-content>
           </ion-view></script>
       <script id="page11.html" type="text/ng-template">
-          <ion-view title="Find A Room">
+          <ion-view title="Find A Room">  
           <ion-content padding="true" class="has-header">
           <div id="logo3">
           <img src="http://images.clipartpanda.com/mafia-clipart-bigger-version-hi.png"width="150" height="150">
@@ -168,10 +171,4 @@
       </script>
 
   </body>
-</html>
-
-  <script src="js/index.js"></script>
-
-</body>
-
 </html>
