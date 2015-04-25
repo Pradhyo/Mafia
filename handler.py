@@ -2,6 +2,7 @@ import webapp2
 import jinja2
 import os
 from google.appengine.api import users
+from google.appengine.ext import db
 
 template_dir = os.path.join(os.path.dirname(__file__),'www')
 jinja_env = jinja2.Environment (loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -26,10 +27,17 @@ class MainHandler(Handler):
 	def get(self):
 		# Checks for active Google account session
 		user = users.get_current_user()
-
 		if user:
 			self.render("index.html", name = user.nickname())
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
 
+class Room(db.Model):
+	name = db.StringProperty(required = True)
+	password = db.StringProperty(required = True)
 
+class User(db.Model):
+	name = db.StringProperty(required = True)
+	room = db.StringProperty(required = True)
+	role = db.IntegerProperty()
+	is_alive = db.BooleanProperty()
