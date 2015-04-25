@@ -29,8 +29,19 @@ class MainHandler(Handler):
 		user = users.get_current_user()
 		if user:
 			self.render("index.html", name = user.nickname())
+
 		else:
 			self.redirect(users.create_login_url(self.request.uri))
+
+	def post(self):
+		room_name = self.request.get('room_name')
+		room_password = self.request.get('room_password')
+		if room_password and room_name:
+			temp_room = Room(name = room_name, password = room_password)
+			temp_room.put()
+			self.redirect('/#/waiting')		
+		else: 
+			self.redirect('/')
 
 class Room(db.Model):
 	name = db.StringProperty(required = True)
