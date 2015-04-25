@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <title>CodePen - mafia</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Mafia</title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">
+    <script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/index.js"></script>
+  </head>
+
+  <body ng-app="ionicApp">
+      <ion-nav-bar class="bar-light">
+          <ion-nav-back-button>
+          </ion-nav-back-button>
+      </ion-nav-bar>
+
+      <ion-nav-view></ion-nav-view>
+
+      <script id="templates/intro.html" type="text/ng-template">
+          <ion-view view-title="">
+          <ion-nav-buttons side="left">
+        <button class="button button-positive button-clear no-animation"
+          ng-click="startApp()" ng-show="!slideIndex">
+          Skip Introduction
+        </button>
+        <button class="button button-positive button-clear no-animation"
+          ng-click="previous()" ng-show="slideIndex > 0">
+          Previous
+        </button>
+          </ion-nav-buttons>
+          <ion-nav-buttons side="right">
+        <button class="button button-positive button-clear no-animation"
+          ng-click="next()" ng-show="slideIndex != 2">
+          Next
+        </button>
+        <button class="button button-positive button-clear no-animation"
+          ng-click="startApp()" ng-show="slideIndex == 2">
+          Start
+        </button>
+          </ion-nav-buttons>
+          <ion-slide-box on-slide-changed="slideChanged(index)">
+          <ion-slide>
+          <h2>Welcome to Mafia!</h2>
+          <div id="logo">
+          <img src="splash ma.png"width="500" height="200">
+          </div>
+          <h3>
+          This is an introduction
+          </h3>
+
+          </ion-slide>
+          <ion-slide>
+          <h3>Getting Started:</h3>
+
+          <div id="list">
+          <ol>
+          <li>Create a game room for your players or join an existing game room</li>
+          <li>Create a username and hit the Ready button</li>
+          <li>Each player is randomly assigned a role</li>
+          <li>Have fun!</li>
+          </ol>
+          </div>
+          </ion-slide>
+          <ion-slide>
+
+          <h3>Rules:</h3>
+          <div id="list">
+          <ol>
+          <li>Night phase - Mafias vote on a player to murder</li>
+          <li>Day phase - Players vote on who they think the mafias are to eliminate them from the game </li>
+          <li>All players that are murdered or eliminated are removed from the game. They are not allowed to communicate with other players</li>
+          <li>Mafia wins when all the innocent players are murdered</li>
+          <li>Innocent players win when all the mafia has been eliminated</li>  
+          </ol>
+          </div>
+
+          </ion-slide>
+          </ion-slide-box>
+          </ion-view>
+    </script>
+
+    <script id="templates/main.html" type="text/ng-template">
+          <ion-view hide-back-button="false" view-title="">
+          <div id="logo">
+          <img src="http://fc06.deviantart.net/fs6/i/2005/104/9/2/Mafia__The_Wallpaper_by_Ka0z.jpg"width="300" height="300">
+          </div>
+          <a href="#/createroom" class="button button-royal button-block">Create A New Room</a>
+          <a href="#/findaroom" class="button button-positive button-block">Find an Existing Room Nearby</a>
+
+          </ion-content>
+          </ion-view></script>
+    </script>
+     <script id="page9.html" type="text/ng-template">
+          <ion-view title="Create Room">
+          <ion-content padding="true" scroll="false">
+          <div id="logo2">
+          <img src="http://images.clipartpanda.com/mafia-clipart-bigger-version-hi.png"width="150" height="150">
+          </div>
+          <form>
+          <label class="item item-input">
+          <span class="input-label">Room name</span>
+          <input type="text" placeholder="">
+          </label>
+          </form>
+          <a href="#waiting" class="button button-dark button-block">Create!</a>
+          </ion-content>
+          </ion-view>
+    </script>
+   <script id="page10.html" type="text/ng-template">
+          <ion-view title="Please Wait...">
+          <ion-content padding="true" scroll="false">
+          <div id="logo3">
+          <img src="http://images.clipartpanda.com/mafia-clipart-bigger-version-hi.png"width="150" height="150">
+          </div>
+          <form>
+          <label class="item item-select">
+          <span class="input-label">Enter your username</span>
+          <select></select>
+          </label>
+          </form>
+          <button class="button button-dark button-block">Ready to Play!</button>
+          </ion-content>
+          </ion-view></script>
+      <script id="page11.html" type="text/ng-template">
+          <ion-view title="Find A Room">
+          <ion-content padding="true" class="has-header">
+          <div id="logo3">
+          <img src="http://images.clipartpanda.com/mafia-clipart-bigger-version-hi.png"width="150" height="150">
+          </div>          <ion-list>
+          <ion-item>Star Wars</ion-item>
+          <ion-item href="#/waiting">Game of Throne</ion-item>
+          <ion-item>Final Fantasy</ion-item>
+          </ion-list>
+          <ion-list>
+          <ion-item>Classic Mafia</ion-item>
+          </ion-list>
+          </ion-content>
+          </ion-view>
+      </script>
+
+  </body>
+</html>
+
+  <script src="js/index.js"></script>
+
+</body>
+
+</html>
