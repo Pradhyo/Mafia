@@ -35,3 +35,12 @@ body {
 .button.ng-hide{
   display:none;
 }
+#logo {
+    margin: 50px 25px;
+}
+#logo2 {
+    margin: 50px 25px;
+}
+#logo3 {
+    margin: 50px 25px;
+}

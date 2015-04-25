@@ -1,9 +1,4 @@
-body {
-  cursor: url('http://ionicframework.com/img/finger.png'), auto;
-}
-.slider {
-  height: 100%;
-}
+
 .slider-slide {
   padding-top: 80px;
   color: #000;
@@ -14,9 +9,7 @@ body {
   font-weight: 300;
 }
 
-#logo {
-  margin: 30px 0px;
-}
+
 
 #list {
   width: 170px;
@@ -34,4 +27,14 @@ body {
 
 .button.ng-hide{
   display:none;
+}
+
+#logo {
+    margin: 50px 0px;
+}
+#logo2 {
+    margin: 50px 0px;
+}
+#logo3 {
+    margin: 50px 0px;
 }

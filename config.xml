@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.mafia143763" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>mafia</name>
-    <content src="index.html"/>
+<widget id="com.ionicframework.tabs729884" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>room</name>
+  <description>
+      
+    </description>
+  <author email="hi@ionicframework" href="http://ionicframework.com/"/>
+  <content src="index.html"/>
   <access origin="*"/>
-  <preference name="AutoHideSplashScreen" value="false" />
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>

@@ -27,13 +27,13 @@
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.mafia143763"
+            "PACKAGE_NAME": "com.ionicframework.tabs729884"
         },
         "org.apache.cordova.console": {
-            "PACKAGE_NAME": "com.ionicframework.mafia143763"
+            "PACKAGE_NAME": "com.ionicframework.tabs729884"
         },
         "org.apache.cordova.device": {
-            "PACKAGE_NAME": "com.ionicframework.mafia143763"
+            "PACKAGE_NAME": "com.ionicframework.tabs729884"
         }
     },
     "dependent_plugins": {}
