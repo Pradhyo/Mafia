@@ -22,6 +22,45 @@ angular.module('ionicApp', ['ionic'])
          url: '/findaroom',
          templateUrl: 'page11.html'
          })
+   .state('page12', {
+      url: '/nightmafia',
+      templateUrl: 'page12.html'
+    })
+    
+    .state('page13', {
+      url: '/nightcivilian',
+      templateUrl: 'page13.html'
+    })
+    
+    .state('page14', {
+      url: '/day',
+      templateUrl: 'page14.html'
+    })
+    
+    .state('page15', {
+      url: '/vote',
+      templateUrl: 'page15.html'
+    })
+    
+    .state('page16', {
+      url: '/execute',
+      templateUrl: 'page16.html'
+    })
+    
+    .state('page17', {
+      url: '/page17',
+      templateUrl: 'page17.html'
+    })
+    
+    .state('page18', {
+      url: '/page18',
+      templateUrl: 'page18.html'
+    })
+    
+    .state('page19', {
+      url: '/page19',
+      templateUrl: 'page19.html'
+    })
   .state('main', {
     url: '/main',
     templateUrl: 'templates/main.html',
@@ -58,6 +97,7 @@ angular.module('ionicApp', ['ionic'])
     $state.go('main');
   }
 });
+
 
 
 
