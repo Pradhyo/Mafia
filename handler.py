@@ -36,12 +36,23 @@ class MainHandler(Handler):
 	def post(self):
 		room_name = self.request.get('room_name')
 		room_password = self.request.get('room_password')
+		current_room = self.request.cookies.get('room')
 		if room_password and room_name:
 			temp_room = Room(name = room_name, password = room_password)
 			temp_room.put()
+			self.response.set_cookie('room', room_name, max_age=360, path='/')
 			self.redirect('/#/waiting')		
+
+		if current_room:
+			username = self.request.get('username')
+			if username:
+				temp_user = User(name = username, room = current_room)
+				temp_user.put()
+				self.redirect('/#/nightmafia')
 		else: 
-			self.redirect('/#/createroom')
+			self.redirect('/')
+
+
 
 class Room(db.Model):
 	name = db.StringProperty(required = True)
