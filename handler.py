@@ -46,6 +46,7 @@ class MainHandler(Handler):
 class Room(db.Model):
 	name = db.StringProperty(required = True)
 	password = db.StringProperty(required = True)
+	admin = db.UserProperty(auto_current_user_add = True)
 
 class User(db.Model):
 	name = db.StringProperty(required = True)
