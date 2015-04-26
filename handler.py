@@ -41,7 +41,7 @@ class MainHandler(Handler):
 			temp_room.put()
 			self.redirect('/#/waiting')		
 		else: 
-			self.redirect('/')
+			self.redirect('/#/createroom')
 
 class Room(db.Model):
 	name = db.StringProperty(required = True)
