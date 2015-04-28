@@ -53,9 +53,23 @@ class CreateUser(Handler):
 			if username:
 				temp_user = User(name = username, room = current_room)
 				temp_user.put()
+				self.response.set_cookie('user', username, max_age=360, path='/')
 				self.redirect('/#/nightmafia')
 		
-
+class JoinRoom(Handler):
+	def post(self):
+		room_name = self.request.get('room_name')
+		room_password = self.request.get('room_password')
+		
+		temp_room = Room.all()
+		temp_room.filter("name = ", room_name)
+		temp_room.filter("password = ", room_password)
+		temp_room = temp_room.fetch(1)
+		if temp_room:
+			self.response.set_cookie('room', room_name, max_age=360, path='/')
+			self.redirect('/#/waiting')		
+		else: 
+			self.redirect('/#/findaroom')	
 
 
 class Room(db.Model):

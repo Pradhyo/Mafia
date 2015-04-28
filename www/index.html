@@ -159,14 +159,20 @@
           <ion-content padding="true" class="has-header">
           <div id="logo3">
           <img src="http://images.clipartpanda.com/mafia-clipart-bigger-version-hi.png"width="150" height="150">
-          </div>          <ion-list>
-          <ion-item>Star Wars</ion-item>
-          <ion-item href="#/waiting">Game of Throne</ion-item>
-          <ion-item>Final Fantasy</ion-item>
-          </ion-list>
-          <ion-list>
-          <ion-item>Classic Mafia</ion-item>
-          </ion-list>
+          </div>          
+
+          <form action = "/joinroom" method = "post">
+          <label class="item item-input">
+          <span class="input-label">Room name</span>
+          <input type="text" placeholder="classic-mafia" name = "room_name">
+          </label>
+          <label class="item item-input">
+          <span class="input-label">Password</span>
+          <input type="Password" placeholder="" name = "room_password">
+          </label>
+          <input type = "submit" value = "Create" class="button button-dark button-block">
+          </form>
+
           </ion-content>
           </ion-view>
       </script>
