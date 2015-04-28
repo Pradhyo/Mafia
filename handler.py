@@ -46,6 +46,12 @@ class MainHandler(Handler):
 			self.redirect('/')
 
 class CreateUser(Handler):
+	def get(self):
+		current_room = self.request.cookies.get('room')
+		current_user = self.request.cookies.get('user')
+		players = User.all().filter("room =", current_room)
+		self.render("temp.html", players = players)
+
 	def post(self):
 		current_room = self.request.cookies.get('room')
 		if current_room:
@@ -55,7 +61,7 @@ class CreateUser(Handler):
 				temp_user.put()
 				self.response.set_cookie('user', username, max_age=360, path='/')
 				players = User.all().filter("room =", current_room)
-				self.render("temp.html", players = players)
+				self.redirect('/newuser')
 						
 class JoinRoom(Handler):
 	def post(self):
