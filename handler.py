@@ -54,8 +54,9 @@ class CreateUser(Handler):
 				temp_user = User(name = username, room = current_room)
 				temp_user.put()
 				self.response.set_cookie('user', username, max_age=360, path='/')
-				self.redirect('/#/nightmafia')
-		
+				players = User.all().filter("room =", current_room)
+				self.render("temp.html", players = players)
+						
 class JoinRoom(Handler):
 	def post(self):
 		room_name = self.request.get('room_name')
