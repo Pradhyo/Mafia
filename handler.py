@@ -62,11 +62,16 @@ class CreateUser(Handler):
 		current_room = self.request.cookies.get('room')
 		if current_room:
 			username = self.request.get('username')
+			current_user = User.all().filter("email =", users.get_current_user().email()).get()
 			if username:
-				temp_user = User(name = username, room = current_room, role = 0)
-				temp_user.put()
+				if not current_user:
+					temp_user = User(name = username, room = current_room, role = 0, email = users.get_current_user().email())
+					temp_user.put()
+				if current_user:
+					current_user.name = username
+					current_user.put()
 				self.response.set_cookie('user', username, path='/')
-				self.redirect('/newuser')
+				self.redirect('/newuser')					
 						
 class JoinRoom(Handler):
 	def post(self):
@@ -78,7 +83,7 @@ class JoinRoom(Handler):
 		temp_room.filter("password = ", room_password)
 		temp_room = temp_room.fetch(1)
 		if temp_room:
-			self.response.set_cookie('room', room_name, max_age=360, path='/')
+			self.response.set_cookie('room', room_name, path='/')
 			self.redirect('/#/waiting')		
 		else: 
 			self.redirect('/#/findaroom')	
@@ -93,5 +98,6 @@ class Room(db.Model):
 class User(db.Model):
 	name = db.StringProperty(required = True)
 	room = db.StringProperty(required = True)
+	email = db.StringProperty(required = True)
 	role = db.IntegerProperty()
 	is_alive = db.BooleanProperty()
