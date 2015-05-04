@@ -3,6 +3,7 @@ import jinja2
 import os
 from google.appengine.api import users
 from google.appengine.ext import db
+from random import randint
 
 template_dir = os.path.join(os.path.dirname(__file__),'www')
 jinja_env = jinja2.Environment (loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -49,7 +50,6 @@ class MainHandler(Handler):
 class CreateUser(Handler):
 	def get(self):
 		current_room_name = self.request.cookies.get('room')
-		current_user = self.request.cookies.get('user')
 		current_room = Room.all().filter("name =", current_room_name).get()
 		is_admin = current_room.admin == users.get_current_user().user_id()
 		if current_room.in_progress:
@@ -88,6 +88,35 @@ class JoinRoom(Handler):
 		else: 
 			self.redirect('/#/findaroom')	
 
+class GamePlay(Handler):
+	def get(self):
+		current_user_name = self.request.cookies.get('user')
+		current_user = User.all().filter("name =", current_user_name).get()
+		self.response.set_cookie('role', roles[current_user.role], path='/')
+		self.render("role.html", role = roles[current_user.role])
+
+	def post(self):
+		current_room_name = self.request.cookies.get('room')
+		players = User.all().filter("room =", current_room_name).fetch(limit=None)
+		total_players = len(players)
+		if total_players > 3:
+			random_user = 0
+			while players[random_user].role != 0:
+				random_user = randint(0,total_players-1)
+			players[random_user].role = 2
+			players[random_user].put()
+			while players[random_user].role != 0:
+				random_user = randint(0,total_players-1)
+			players[random_user].role = 3
+			players[random_user].put()
+			for i in range(total_players/3):
+				while players[random_user].role != 0:
+					random_user = randint(0,total_players-1)
+				players[random_user].role = 1
+				players[random_user].put()
+			self.redirect('/game')
+		else:
+			self.redirect('/newuser')
 
 class Room(db.Model):
 	name = db.StringProperty(required = True)

@@ -1,5 +1,5 @@
 import webapp2
-from handler import MainHandler, CreateUser, JoinRoom
+from handler import MainHandler, CreateUser, JoinRoom, GamePlay
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
@@ -8,5 +8,6 @@ app = webapp2.WSGIApplication([
 
 app = webapp2.WSGIApplication([('/', MainHandler),
 							   ('/joinroom', JoinRoom),
+							   ('/game', GamePlay),
 							   ('/newuser', CreateUser)], 
 							   debug=True)

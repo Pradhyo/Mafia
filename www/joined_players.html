@@ -7,10 +7,14 @@ The following have joined so far..
 
 {% if is_admin == True %}
 <div><a href="/newuser"> Update list of players </a></div>
-<div><a href="/#/nightmafia"> Start Game </a></div>
+
+<form action="/game" method="post">
+<div><input type="submit"></div>
+</form>
 
 {% else %}
 <div>Admin will ask you to press next when there are enough users.</div>
 <div><a href="/newuser"> Next </a></div>
+<div><a href="/game"> Next2 </a></div>
 
 {% endif %}
