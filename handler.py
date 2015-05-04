@@ -80,8 +80,7 @@ class JoinRoom(Handler):
 		
 		temp_room = Room.all()
 		temp_room.filter("name = ", room_name)
-		temp_room.filter("password = ", room_password)
-		temp_room = temp_room.fetch(1)
+		temp_room.filter("password = ", room_password).get()
 		if temp_room:
 			self.response.set_cookie('room', room_name, path='/')
 			self.redirect('/#/waiting')		
