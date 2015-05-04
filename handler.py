@@ -7,6 +7,7 @@ from google.appengine.ext import db
 template_dir = os.path.join(os.path.dirname(__file__),'www')
 jinja_env = jinja2.Environment (loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
 
+roles = ['Civilian', 'Mafia', 'Doctor', 'Detective']
 
 class Handler(webapp2.RequestHandler):
 	def write(self, *a, **kw):
@@ -38,29 +39,33 @@ class MainHandler(Handler):
 		room_password = self.request.get('room_password')
 		
 		if room_password and room_name:
-			temp_room = Room(name = room_name, password = room_password)
+			temp_room = Room(name = room_name, password = room_password, in_progress = False, admin = users.get_current_user().user_id())
 			temp_room.put()
-			self.response.set_cookie('room', room_name, max_age=360, path='/')
+			self.response.set_cookie('room', room_name, path='/')
 			self.redirect('/#/waiting')		
 		else: 
 			self.redirect('/')
 
 class CreateUser(Handler):
 	def get(self):
-		current_room = self.request.cookies.get('room')
+		current_room_name = self.request.cookies.get('room')
 		current_user = self.request.cookies.get('user')
-		players = User.all().filter("room =", current_room)
-		self.render("temp.html", players = players)
+		current_room = Room.all().filter("name =", current_room_name).get()
+		is_admin = current_room.admin == users.get_current_user().user_id()
+		if current_room.in_progress:
+			self.redirect('#/nightmafia')
+		else:
+			players = User.all().filter("room =", current_room_name)
+			self.render("joined_players.html", players = players, is_admin = is_admin)
 
 	def post(self):
 		current_room = self.request.cookies.get('room')
 		if current_room:
 			username = self.request.get('username')
 			if username:
-				temp_user = User(name = username, room = current_room)
+				temp_user = User(name = username, room = current_room, role = 0)
 				temp_user.put()
-				self.response.set_cookie('user', username, max_age=360, path='/')
-				players = User.all().filter("room =", current_room)
+				self.response.set_cookie('user', username, path='/')
 				self.redirect('/newuser')
 						
 class JoinRoom(Handler):
@@ -82,7 +87,8 @@ class JoinRoom(Handler):
 class Room(db.Model):
 	name = db.StringProperty(required = True)
 	password = db.StringProperty(required = True)
-	admin = db.UserProperty(auto_current_user_add = True)
+	admin = db.StringProperty(required = True)
+	in_progress = db.BooleanProperty(required = True)
 
 class User(db.Model):
 	name = db.StringProperty(required = True)
