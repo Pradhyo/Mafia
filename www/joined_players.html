@@ -1,0 +1,16 @@
+The following have joined so far..        
+
+        {% for player in players%}
+          <h4>{{player.name}}</h4>
+
+        {%endfor%}
+
+{% if is_admin == True %}
+<div><a href="/newuser"> Update list of players </a></div>
+<div><a href="/#/nightmafia"> Start Game </a></div>
+
+{% else %}
+<div>Admin will ask you to press next when there are enough users.</div>
+<div><a href="/newuser"> Next </a></div>
+
+{% endif %}
