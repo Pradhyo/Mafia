@@ -65,7 +65,7 @@ class CreateUser(Handler):
 			current_user = User.all().filter("email =", users.get_current_user().email()).get()
 			if username:
 				if not current_user:
-					temp_user = User(name = username, room = current_room, role = 0, email = users.get_current_user().email())
+					temp_user = User(name = username, room = current_room, role = 0, email = users.get_current_user().email(), is_alive = True)
 					temp_user.put()
 				if current_user:
 					current_user.name = username
@@ -78,10 +78,8 @@ class JoinRoom(Handler):
 		room_name = self.request.get('room_name')
 		room_password = self.request.get('room_password')
 		
-		temp_room = Room.all()
-		temp_room.filter("name = ", room_name)
-		temp_room.filter("password = ", room_password).get()
-		if temp_room:
+		temp_room = Room.all().filter("name = ", room_name).get()
+		if temp_room and temp_room.password == room_password and not temp_room.in_progress:
 			self.response.set_cookie('room', room_name, path='/')
 			self.redirect('/#/waiting')		
 		else: 
@@ -96,6 +94,7 @@ class GamePlay(Handler):
 
 	def post(self):
 		current_room_name = self.request.cookies.get('room')
+		current_room = Room.all().filter("name =", current_room_name).get()
 		players = User.all().filter("room =", current_room_name).fetch(limit=None)
 		total_players = len(players)
 		if total_players > 3:
@@ -113,6 +112,8 @@ class GamePlay(Handler):
 					random_user = randint(0,total_players-1)
 				players[random_user].role = 1
 				players[random_user].put()
+			current_room.in_progress = True
+			current_room.put()
 			self.redirect('/game')
 		else:
 			self.redirect('/newuser')
