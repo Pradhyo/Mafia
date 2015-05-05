@@ -53,7 +53,7 @@ class CreateUser(Handler):
 		current_room = Room.all().filter("name =", current_room_name).get()
 		is_admin = current_room.admin == users.get_current_user().user_id()
 		if current_room.in_progress:
-			self.redirect('#/nightmafia')
+			self.redirect('/game')
 		else:
 			players = User.all().filter("room =", current_room_name)
 			self.render("joined_players.html", players = players, is_admin = is_admin)
