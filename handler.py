@@ -133,7 +133,7 @@ class Room(db.Model):
 	password = db.StringProperty(required = True)
 	admin = db.StringProperty(required = True)
 	in_progress = db.BooleanProperty(required = True)
-	is_day = db.BooleanProperty(required = True)
+	is_day = db.BooleanProperty()
 
 class User(db.Model):
 	name = db.StringProperty(required = True)
