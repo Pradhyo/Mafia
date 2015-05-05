@@ -9,12 +9,11 @@ The following have joined so far..
 <div><a href="/newuser"> Update list of players </a></div>
 
 <form action="/game" method="post">
-<div><input type="submit"></div>
+<div><input type="submit" value="Start Game"></div>
 </form>
 
 {% else %}
 <div>Admin will ask you to press next when there are enough users.</div>
-<div><a href="/newuser"> Next </a></div>
-<div><a href="/game"> Next2 </a></div>
+<div><a href="/game"> Next </a></div>
 
 {% endif %}
