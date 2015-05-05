@@ -69,6 +69,7 @@ class CreateUser(Handler):
 					temp_user.put()
 				if current_user:
 					current_user.name = username
+					current_user.room = current_room
 					current_user.put()
 				self.response.set_cookie('user', username, path='/')
 				self.redirect('/newuser')					
