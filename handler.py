@@ -40,7 +40,7 @@ class MainHandler(Handler):
 		room_password = self.request.get('room_password')
 		
 		if room_password and room_name:
-			temp_room = Room(name = room_name, password = room_password, in_progress = False, admin = users.get_current_user().user_id())
+			temp_room = Room(name = room_name, password = room_password, in_progress = False, admin = users.get_current_user().user_id(), is_day = None)
 			temp_room.put()
 			self.response.set_cookie('room', room_name, path='/')
 			self.redirect('/#/waiting')		
@@ -90,11 +90,15 @@ class GamePlay(Handler):
 		current_room_name = self.request.cookies.get('room')
 		current_room = Room.all().filter("name =", current_room_name).get()
 		if current_room.in_progress:
-			current_user_name = self.request.cookies.get('user')
-			mafia = User.all().filter("role =", 1)
-			current_user = User.all().filter("name =", current_user_name).get()
-			self.response.set_cookie('role', roles[current_user.role], path='/')
-			self.render("role.html", role = roles[current_user.role], mafia = mafia)
+			if current_room.is_day == None:
+				current_user_name = self.request.cookies.get('user')
+				mafia = User.all().filter("role =", 1)
+				current_user = User.all().filter("name =", current_user_name).get()
+				self.response.set_cookie('role', roles[current_user.role], path='/')
+				self.render("role.html", role = roles[current_user.role], mafia = mafia)
+			elif current_room.is_day == False:
+				players = Room.all().filter("name =", current_room_name)
+				self.render("vote.html", players = players)
 		else:
 			self.redirect('/newuser')
 
@@ -129,6 +133,7 @@ class Room(db.Model):
 	password = db.StringProperty(required = True)
 	admin = db.StringProperty(required = True)
 	in_progress = db.BooleanProperty(required = True)
+	is_day = db.BooleanProperty(required = True)
 
 class User(db.Model):
 	name = db.StringProperty(required = True)
