@@ -1,1 +1,10 @@
-You are {{role}}
+You are <b>{{role}} </b><br><br>
+
+
+{% if role == 'Mafia' %}
+
+<div> The following are Mafia </div>
+	{% for each in mafia %}
+		<br>{{each.name}}
+	{% endfor %}
+{% endif %}
