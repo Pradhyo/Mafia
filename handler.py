@@ -87,10 +87,15 @@ class JoinRoom(Handler):
 
 class GamePlay(Handler):
 	def get(self):
-		current_user_name = self.request.cookies.get('user')
-		current_user = User.all().filter("name =", current_user_name).get()
-		self.response.set_cookie('role', roles[current_user.role], path='/')
-		self.render("role.html", role = roles[current_user.role])
+		current_room_name = self.request.cookies.get('room')
+		current_room = Room.all().filter("name =", current_room_name).get()
+		if current_room.in_progress:
+			current_user_name = self.request.cookies.get('user')
+			current_user = User.all().filter("name =", current_user_name).get()
+			self.response.set_cookie('role', roles[current_user.role], path='/')
+			self.render("role.html", role = roles[current_user.role])
+		else:
+			self.redirect('/newuser')
 
 	def post(self):
 		current_room_name = self.request.cookies.get('room')
