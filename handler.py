@@ -91,9 +91,10 @@ class GamePlay(Handler):
 		current_room = Room.all().filter("name =", current_room_name).get()
 		if current_room.in_progress:
 			current_user_name = self.request.cookies.get('user')
+			mafia = User.all().filter("role =", 1)
 			current_user = User.all().filter("name =", current_user_name).get()
 			self.response.set_cookie('role', roles[current_user.role], path='/')
-			self.render("role.html", role = roles[current_user.role])
+			self.render("role.html", role = roles[current_user.role], mafia = mafia)
 		else:
 			self.redirect('/newuser')
 
