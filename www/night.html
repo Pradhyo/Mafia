@@ -1,0 +1,15 @@
+
+{% if current_role == 'Mafia' %}
+Who do you want to kill? <br>
+If all mafia don't choose the same person, nobody is murdered.
+{% elif current_role == 'Civilian' %}
+Who do you hate the most?
+{% endif %}
+
+<form action="/votes" method="post">
+	{% for player in players%}
+		<input type="radio" name="day_vote" value="{{player.name}}"> {{player.name}}<br>
+		<input type="hidden" name="current_role" value="{{current_role}}">
+		<input type="hidden" name="current_phase" value="night">
+	{%endfor%}
+</form>

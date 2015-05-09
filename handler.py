@@ -99,7 +99,8 @@ class GamePlay(Handler):
 				self.render("role.html", role = roles[current_user.role], mafia = mafia)
 			elif current_room.is_day == False:
 				players = Room.all().filter("name =", current_room_name)
-				self.render("vote.html", players = players)
+				current_role = self.request.cookies.get('role')
+				self.render("night.html", players = players, current_role = current_role)
 		else:
 			self.redirect('/newuser')
 
