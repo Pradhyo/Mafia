@@ -7,7 +7,7 @@ Who do you hate the most?
 {% endif %}
 
 <form action="/votes" method="post">
-	{% for player in players%}
+	{% for player in players if player.is_alive == True %}
 		<input type="radio" name="day_vote" value="{{player.name}}"> {{player.name}}<br>
 		<input type="hidden" name="current_role" value="{{current_role}}">
 		<input type="hidden" name="current_phase" value="night">
