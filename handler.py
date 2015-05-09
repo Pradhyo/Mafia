@@ -3,7 +3,7 @@ import jinja2
 import os
 from google.appengine.api import users
 from google.appengine.ext import db
-from random import randint
+from random import randint, sample
 
 template_dir = os.path.join(os.path.dirname(__file__),'www')
 jinja_env = jinja2.Environment (loader = jinja2.FileSystemLoader(template_dir), autoescape = True)
@@ -109,20 +109,11 @@ class GamePlay(Handler):
 		players = User.all().filter("room =", current_room_name).fetch(limit=None)
 		total_players = len(players)
 		if total_players > 3:
-			random_user = 0
-			while players[random_user].role != 0:
-				random_user = randint(0,total_players-1)
-			players[random_user].role = 2
-			players[random_user].put()
-			while players[random_user].role != 0:
-				random_user = randint(0,total_players-1)
-			players[random_user].role = 3
-			players[random_user].put()
-			for i in range(total_players/3):
-				while players[random_user].role != 0:
-					random_user = randint(0,total_players-1)
-				players[random_user].role = 1
-				players[random_user].put()
+			mafia_list = sample(players, total_players/3)
+			for each_mafia in mafia_list:
+				each_mafia.role = 1
+			db.put(mafia_list)
+
 			current_room.in_progress = True
 			current_room.put()
 			self.redirect('/game')
