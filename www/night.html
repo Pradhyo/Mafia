@@ -1,3 +1,8 @@
+<h1> Night phase <br> </h1>
+<h2> Hanged: {{hanged}} </h2>
+
+Admin should wait until everyone submits at least once. <br>
+When admin submits his answer, most recent answer by everyone will be considered. <br>
 
 {% if current_role == 'Mafia' %}
 Who do you want to kill? <br>
@@ -6,10 +11,9 @@ If all mafia don't choose the same person, nobody is murdered.
 Who do you hate the most?
 {% endif %}
 
-<form action="/votes" method="post">
+<form action="/nightvotes" method="post">
 	{% for player in players if player.is_alive == True %}
-		<input type="radio" name="day_vote" value="{{player.name}}"> {{player.name}}<br>
-		<input type="hidden" name="current_role" value="{{current_role}}">
-		<input type="hidden" name="current_phase" value="night">
+		<input type="radio" name="vote" value="{{player.name}}"> {{player.name}}<br>
 	{%endfor%}
+		<input type="submit">
 </form>
