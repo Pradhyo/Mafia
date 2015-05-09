@@ -93,7 +93,7 @@ class GamePlay(Handler):
 		if current_room.in_progress:
 			if current_room.is_day == None:
 				current_user_name = self.request.cookies.get('user')
-				mafia = User.all().filter("role =", 1)
+				mafia = User.all().filter("room =", current_room_name).filter("role =", 1)
 				current_user = User.all().filter("name =", current_user_name).get()
 				self.response.set_cookie('role', roles[current_user.role], path='/')
 				self.render("role.html", role = roles[current_user.role], mafia = mafia)
@@ -109,7 +109,7 @@ class GamePlay(Handler):
 		players = User.all().filter("room =", current_room_name).fetch(limit=None)
 		total_players = len(players)
 		if total_players > 3:
-			mafia_list = sample(players, total_players/3)
+			mafia_list = sample(players, (total_players+1)/3)
 			for each_mafia in mafia_list:
 				each_mafia.role = 1
 			db.put(mafia_list)
