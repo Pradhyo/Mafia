@@ -8,3 +8,13 @@ You are <b>{{role}} </b><br><br>
 		<br>{{each.name}}
 	{% endfor %}
 {% endif %}
+
+<br>
+{% if is_admin == 'True' %}
+	Press Proceed when all users are ready to go.
+	<form action="/proceed" method="post">
+	<div><input type="submit" value="Proceed"></div>
+	</form>
+{% else %}
+	<br>Tell admin to proceed when you are ready.
+{% endif %}
