@@ -43,6 +43,7 @@ class MainHandler(Handler):
 			temp_room = Room(name = room_name, password = room_password, in_progress = False, admin = users.get_current_user().user_id(), is_day = None)
 			temp_room.put()
 			self.response.set_cookie('room', room_name, path='/')
+			self.response.set_cookie('room_admin', 'True', path='/')			
 			self.redirect('/#/waiting')		
 		else: 
 			self.redirect('/')
@@ -96,9 +97,10 @@ class GamePlay(Handler):
 				mafia = User.all().filter("room =", current_room_name).filter("role =", 1)
 				current_user = User.all().filter("name =", current_user_name).get()
 				self.response.set_cookie('role', roles[current_user.role], path='/')
-				self.render("role.html", role = roles[current_user.role], mafia = mafia)
+				is_admin = self.request.cookies.get('room_admin')
+				self.render("role.html", role = roles[current_user.role], mafia = mafia, is_admin = is_admin)
 			elif current_room.is_day == False:
-				players = Room.all().filter("name =", current_room_name)
+				players = User.all().filter("room =", current_room_name)
 				current_role = self.request.cookies.get('role')
 				self.render("night.html", players = players, current_role = current_role)
 		else:
@@ -120,6 +122,17 @@ class GamePlay(Handler):
 			self.redirect('/game')
 		else:
 			self.redirect('/newuser')
+
+class Proceed(Handler):
+	def post(self):
+		current_room_name = self.request.cookies.get('room')
+		current_room = Room.all().filter("name =", current_room_name).get()
+		if current_room.is_day == None:
+			current_room.is_day = False
+		else:
+			current_room.is_day = not current_room.is_day
+		current_room.put()
+		self.redirect('/game')		
 
 class Room(db.Model):
 	name = db.StringProperty(required = True)
