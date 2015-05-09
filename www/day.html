@@ -1,0 +1,14 @@
+<h1> Day Phase </h1>
+<h2> Murdered by mafia during the night: {{murdered}} </h2>
+
+Admin should wait until everyone submits at least once. <br>
+When admin submits his vote, most recent vote by everyone will be considered. <br>
+
+Who do you think is Mafia? <br>
+
+<form action="/dayvotes" method="post">
+	{% for player in players if player.is_alive == True %}
+		<input type="radio" name="vote" value="{{player.name}}"> {{player.name}}<br>
+	{%endfor%}
+		<input type="submit">
+</form>
