@@ -34,7 +34,7 @@ Who do you hate the most?
 	{% for player in players if player.is_alive == True %}
 		<input type="radio" name="vote" value="{{player.name}}"> {{player.name}}<br>
 	{%endfor%}
-		<input type="submit">
+		<input type="submit" class="button button-positive button-block">
 </form>
 
 </body>
