@@ -1,3 +1,21 @@
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Mafia Game in Progress</title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">  
+  </head>
+
+  <body ng-app="ionicApp" class="text-center">
+
 The following have joined so far..        
 
         {% for player in players%}
@@ -9,7 +27,7 @@ The following have joined so far..
 <div><a href="/newuser"> Update list of players </a></div>
 
 <form action="/game" method="post">
-<div><input type="submit" value="Start Game"></div>
+<div><input type="submit" value="Start Game" class="button button-positive button-block"></div>
 </form>
 
 {% else %}
@@ -17,3 +35,6 @@ The following have joined so far..
 <div><a href="/game"> Next </a></div>
 
 {% endif %}
+
+</body>
+</html>
