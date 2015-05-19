@@ -1,3 +1,21 @@
+<html ng-app="ionicApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title>Mafia Game in Progress</title>
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">  
+  </head>
+
+  <body ng-app="ionicApp" class="text-center">
+
 <h1> Day Phase </h1>
 <h2> Murdered by mafia during the night: {{murdered}} </h2>
 
@@ -10,5 +28,8 @@ Who do you think is Mafia? <br>
 	{% for player in players if player.is_alive == True %}
 		<input type="radio" name="vote" value="{{player.name}}"> {{player.name}}<br>
 	{%endfor%}
-		<input type="submit">
+		<input type="submit" class="button button-positive button-block">
 </form>
+
+</body>
+</html>
