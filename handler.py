@@ -196,6 +196,9 @@ class DayVotes(Handler):
 				current_room.put()
 		self.redirect('/game')
 
+class Final(Handler):
+	def get(self):
+		self.render('final.html')
 
 class Room(db.Model):
 	name = db.StringProperty(required = True)
